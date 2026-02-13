@@ -16,7 +16,7 @@ export const mastra = new Mastra({
   storage: new LibSQLStore({
     id: "mastra-storage",
     // stores observability, scores, ... into persistent file storage
-    url: "file:/Users/roxi/CursorProjects/nextjs-agents/mastra.db",
+    url: ":memory:",
   }),
   logger: new PinoLogger({
     name: "Mastra",
