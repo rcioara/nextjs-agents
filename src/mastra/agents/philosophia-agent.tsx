@@ -2,6 +2,8 @@ import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { wikipediaLookupTool } from "../tools/wikipedia-tool";
 import { webSearchTool } from "../tools/web-search-tool";
+import { LibSQLVector } from "@mastra/libsql";
+import { ModelRouterEmbeddingModel } from "@mastra/core/llm";
 
 export const philosophiaAgent = new Agent({
   id: "philosophia-agent",
@@ -49,6 +51,11 @@ export const philosophiaAgent = new Agent({
   model: "openai/gpt-4.1-mini",
   tools: { wikipediaLookupTool, webSearchTool },
   memory: new Memory({
+    vector: new LibSQLVector({
+      id: "philosophia-memory-vector",
+      url: ":memory:",
+    }),
+    embedder: new ModelRouterEmbeddingModel("openai/text-embedding-3-small"),
     options: {
       lastMessages: 15, // conversation history window
       semanticRecall: {
