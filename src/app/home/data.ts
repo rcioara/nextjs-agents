@@ -59,7 +59,7 @@ export const features: Feature[] = [
   {
     icon: "📚",
     title: "2,500+ Years of Thought",
-    desc: "From Pre-Socratics to Post-Structuralism. Explore every major philosophical tradition, thinker, and school of thought.",
+    desc: "From Pre-Socratics to Contemporary philosophy. Explore every major philosophical tradition, thinker, and school of thought.",
   },
   {
     icon: "💬",
