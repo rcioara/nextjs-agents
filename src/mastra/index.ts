@@ -7,15 +7,13 @@ import {
   CloudExporter,
   SensitiveDataFilter,
 } from "@mastra/observability";
-import { weatherWorkflow } from "./workflows/weather-workflow";
-import { weatherAgent } from "./agents/weather-agent";
+import { philosophiaAgent } from "./agents/philosophia-agent";
 
 export const mastra = new Mastra({
-  workflows: { weatherWorkflow },
-  agents: { weatherAgent },
+  workflows: {},
+  agents: { philosophiaAgent },
   storage: new LibSQLStore({
     id: "mastra-storage",
-    // stores observability, scores, ... into persistent file storage
     url: ":memory:",
   }),
   logger: new PinoLogger({
