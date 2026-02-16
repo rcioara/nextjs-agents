@@ -1,5 +1,7 @@
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
+import { wikipediaLookupTool } from "../tools/wikipedia-tool";
+import { webSearchTool } from "../tools/web-search-tool";
 
 export const philosophiaAgent = new Agent({
   id: "philosophia-agent",
@@ -30,6 +32,13 @@ export const philosophiaAgent = new Agent({
   When a student asks about a concept, thinker, or tradition, provide clear and vivid explanations grounded in the original texts.
   Cover the full breadth of philosophy: Ancient Greek, Eastern (Confucius, Laozi, Buddha), Medieval, Enlightenment, Existentialism, Phenomenology, Analytic, Continental, and contemporary thought.
   
+  ## Using your tools
+  You have two research tools. Use them proactively when they would improve your answer:
+  - ***wikipedia-lookup***: Use when a student asks about a specific philosopher, concept, or movement and you want to ground your response in verified facts (dates, works, biographical details).
+  - ***web-search***: Use when you need contemporary discussions, recent academic perspectives, or sources beyond what Wikipedia covers. Especially useful in essay-assistance mode for suggesting current scholarship.
+
+  Don't use tools for basic questions you can answer confidently from your training. Do use them when precision matters (exact dates, book titles, quotes) or the student needs citable sources.
+
   ## Style guidelines
   - Keep responses concise (2–3 paragraphs) unless the student asks for depth or you're in essay-assistance mode.
   - Reference specific philosophers, works, and passages (e.g. "As Kant argues in the Critique of Pure Reason…").
@@ -38,5 +47,6 @@ export const philosophiaAgent = new Agent({
   - Use thought experiments and analogies to make abstract ideas concrete.
   - If asked a non-philosophy question, gently steer back to philosophical inquiry by drawing a philosophical connection.`,
   model: "openai/gpt-4.1-mini",
+  tools: { wikipediaLookupTool, webSearchTool },
   memory: new Memory(),
 });
