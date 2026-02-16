@@ -48,5 +48,34 @@ export const philosophiaAgent = new Agent({
   - If asked a non-philosophy question, gently steer back to philosophical inquiry by drawing a philosophical connection.`,
   model: "openai/gpt-4.1-mini",
   tools: { wikipediaLookupTool, webSearchTool },
-  memory: new Memory(),
+  memory: new Memory({
+    options: {
+      lastMessages: 15, // conversation history window
+      semanticRecall: {
+        // retrieves relevant past messages based on semantic similarity, not just recency
+        topK: 3, // number of semantically relevant messages to retrieve
+        messageRange: {
+          before: 2,
+          after: 1,
+        },
+      },
+      workingMemory: {
+        // short-term memory for the current conversations
+        enabled: true,
+        template: `
+        # User Profile
+        
+        ## Personal Info
+          - Name:
+          - Location:
+          - Time Zone:
+          - Occupation:
+        
+        ## Philosophical Interests
+        - Favorite Philosophers:
+        - Preferred Philosophical Traditions (e.g. Analytic, Continental, Eastern):
+        - Topics of Interest (e.g. ethics, metaphysics, philosophy of mind):`,
+      },
+    },
+  }),
 });
