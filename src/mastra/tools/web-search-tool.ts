@@ -5,7 +5,7 @@ export const webSearchTool = createTool({
   id: "web-search",
   description:
     "Search the web for current philosophical discussions, academic papers, essays, or contemporary takes on philosophical topics." +
-    "Use this when Wikipedia is not enough or you need recent, diverse sources.",
+    "Use this when you need recent, diverse sources.",
   inputSchema: z.object({
     query: z
       .string()
@@ -31,16 +31,7 @@ export const webSearchTool = createTool({
   execute: async ({ query, count }) => {
     const apiKey = process.env.BRAVE_API_KEY;
     if (!apiKey) {
-      return {
-        results: [
-          {
-            title: "Error",
-            url: "",
-            description:
-              "BRAVE_API_KEY is not set. Please add it to your .env file.",
-          },
-        ],
-      };
+      throw new Error("BRAVE_API_KEY is not set. Add it to your .env file.");
     }
 
     const url = `https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=${count}`;
@@ -53,15 +44,7 @@ export const webSearchTool = createTool({
     });
 
     if (!res.ok) {
-      return {
-        results: [
-          {
-            title: "Search Error",
-            url: "",
-            description: `Brave Search returned status ${res.status}.`,
-          },
-        ],
-      };
+      throw new Error(`Brave Search returned status ${res.status}`);
     }
 
     const data = await res.json();

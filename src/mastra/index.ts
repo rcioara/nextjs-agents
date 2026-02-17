@@ -8,9 +8,10 @@ import {
   SensitiveDataFilter,
 } from "@mastra/observability";
 import { philosophiaAgent } from "./agents/philosophia-agent";
+import { deepResearchWorkflow } from "./workflows/deep-research-workflow";
 
 export const mastra = new Mastra({
-  workflows: {},
+  workflows: { deepResearchWorkflow },
   agents: { philosophiaAgent },
   storage: new LibSQLStore({
     id: "mastra-storage",
