@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PhiloSophia
+
+An AI-powered philosophy tutor that guides you through 2,500 years of philosophical thought. Built with [Mastra](https://mastra.ai), [Next.js](https://nextjs.org), and OpenAI.
+
+## Teaching Modes
+
+- **Socratic Dialogue** - Guided questioning to challenge assumptions and deepen understanding
+- **Debate & Argumentation** - Devil's advocate reasoning to sharpen critical thinking
+- **Essay Assistance** - Help structuring papers and analyzing philosophical arguments
+- **Exploration & Explanation** - Comprehensive coverage of philosophy across eras and traditions
+
+## Tech Stack
+
+- **Framework**: [Mastra](https://mastra.ai) (AI agent framework)
+- **Frontend**: Next.js 16, React 19, Material-UI, Tailwind CSS
+- **LLM**: OpenAI GPT-4 mini
+- **Search**: Brave Search API + Wikipedia API
+- **Memory**: LibSQL vector database with semantic embeddings
+- **Streaming**: Vercel AI SDK
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- An [OpenAI API key](https://platform.openai.com/api-keys)
+- A [Brave Search API key](https://brave.com/search/api/)
+
+### Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy the example env file and add your keys:
+
+```bash
+cp .env.example .env
+```
+
+```
+OPENAI_API_KEY=sk-...
+BRAVE_API_KEY=...
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001) to start chatting.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/                    # Next.js frontend
+    api/philosophia/      # Chat API route
+    components/           # UI components (Hero, Chat, Features, etc.)
+  mastra/
+    agents/               # PhiloSophia agent definition
+    tools/                # Deep research, Wikipedia lookup, web search
+    workflows/            # Multi-step research workflow
+```
 
-## Learn More
+## How It Works
 
-To learn more about Next.js, take a look at the following resources:
+1. You ask a question in the chat interface
+2. The Mastra agent classifies your question and decides which tools to use
+3. The deep research workflow runs Wikipedia and web searches in parallel
+4. Results are synthesized into a contextual, source-backed response
+5. Conversation memory persists across messages using semantic recall
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command         | Description                        |
+| --------------- | ---------------------------------- |
+| `npm run dev`   | Start dev server on port 3001      |
+| `npm run build` | Build for production               |
+| `npm run start` | Start production server            |
+| `npm run lint`  | Run ESLint                         |
